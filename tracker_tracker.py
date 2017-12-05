@@ -19,13 +19,14 @@ for url in url_file:
     driver.get(url)
     delay = 10 # seconds
     try:
-        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, "//script[contains(@src,'sokrati')]")))
-        msg = "Sokrati tracking found!"
+        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, "//script[contains(@src,'https://tracking.sokrati.com/javascripts/tracker.js')]")))
+        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, "//script[contains(@src,'https://chuknu.sokrati.com/14899/tracker.js')]")))
+        msg = "Sokrati pixels present, Bindass!"
         file.write(url + '\t' + msg + '\n' )    
         driver.quit()
        
     except TimeoutException:
-        msg = "Sokrati tracking is not present"
+        msg = "Sokrati pixels not present, Ram Ram!"
         file.write(url + '\t' + msg + '\n' )
         driver.quit()
 file.close()
